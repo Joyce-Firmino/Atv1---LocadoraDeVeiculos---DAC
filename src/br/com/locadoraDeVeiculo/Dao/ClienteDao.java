@@ -5,6 +5,9 @@ import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.locadoraDeVeiculo.Conexao.FabricaDeConexao;
 import br.com.locadoraDeVeiculo.CriacaoDeTabelas.TabelaCliente;
 import br.com.locadoraDeVeiculo.Entidades.Cliente;
@@ -82,4 +85,77 @@ public class ClienteDao {
             throw new RuntimeException(e);
         }
     }
+	
+	//Método para listar todos os clientes do banco
+    public List<Cliente> listarClientes() {
+        try {
+        	List<Cliente> clientes = new ArrayList<Cliente>();
+            String sql = "SELECT * FROM cliente ORDER BY id";
+
+            // prepara statement para seleção
+            PreparedStatement stmt = conexaoCliente.prepareStatement(sql);
+            
+            // executa a consulta
+            ResultSet rs = stmt.executeQuery();
+            
+            // itera sobre os resultados
+            while (rs.next()) {
+            	
+                // cria um novo cliente com os dados do resultado
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getLong("id"));
+                cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEndereco(rs.getString("endereco"));
+                
+                //adiciona o cliente à lista
+                clientes.add(cliente);
+            }
+            rs.close();
+            stmt.close();
+            return clientes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Método para atualizar um cliente no BD
+    public void atualizarCliente(Long id_Atualizar,  Cliente novosDadosCliente) {
+    	String sql = "UPDATE cliente SET nomeCompleto=?, cpf=?, telefone=?, endereco=? WHERE id=?";
+        try {
+            // prepara statement para atualização
+            PreparedStatement stmt = conexaoCliente.prepareStatement(sql);
+            // seta os novos valores do cliente
+            stmt.setString(1, novosDadosCliente.getNomeCompleto());
+            stmt.setString(2, novosDadosCliente.getCpf());
+            stmt.setString(3, novosDadosCliente.getTelefone());
+            stmt.setString(4, novosDadosCliente.getEndereco());
+            // definindo que o cliente que sera atualizado será o q possui o ID correspondente ao valor de id_Atualizar.
+            stmt.setLong(5, id_Atualizar); 
+            stmt.executeUpdate(); // executa a atualização
+            stmt.close();
+            System.out.println("Cliente atualizado com sucesso!");
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    //Método para deletar cliente do BD
+    public void deletarCliente(Long idCliente) {
+        String sql = "DELETE FROM cliente WHERE id=?";
+        try {
+            // prepara statement para exclusão
+            PreparedStatement stmt = conexaoCliente.prepareStatement(sql);
+            // define o ID do cliente a ser deletado
+            stmt.setLong(1, idCliente);
+            // executa a exclusão
+            stmt.executeUpdate();
+            stmt.close();
+            System.out.println("Cliente excluido com sucesso!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 }

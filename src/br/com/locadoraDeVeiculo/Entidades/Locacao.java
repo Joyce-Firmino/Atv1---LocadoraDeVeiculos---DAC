@@ -3,18 +3,18 @@ package br.com.locadoraDeVeiculo.Entidades;
 import java.util.Date;
 
 public class Locacao {
-	private Long id;
+	private int id;
 	private Date dt_Inicio;
 	private Date dt_Fim;
 	private Double valor;
-	private Long id_Veiculo;
-	private Long id_Cliente;
+	private int id_Veiculo;
+	private int id_Cliente;
 	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Date getDt_Inicio() {
@@ -35,16 +35,16 @@ public class Locacao {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Long getId_Veiculo() {
+	public int getId_Veiculo() {
 		return id_Veiculo;
 	}
-	public void setId_Veiculo(Long id_Veiculo) {
+	public void setId_Veiculo(int id_Veiculo) {
 		this.id_Veiculo = id_Veiculo;
 	}
-	public Long getId_Cliente() {
+	public int getId_Cliente() {
 		return id_Cliente;
 	}
-	public void setId_Cliente(Long id_Cliente) {
+	public void setId_Cliente(int id_Cliente) {
 		this.id_Cliente = id_Cliente;
 	}
 }

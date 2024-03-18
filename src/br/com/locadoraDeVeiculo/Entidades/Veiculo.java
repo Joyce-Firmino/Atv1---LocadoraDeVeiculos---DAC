@@ -1,7 +1,7 @@
 package br.com.locadoraDeVeiculo.Entidades;
 
 public class Veiculo {
-	private Long id;
+	private int id;
 	private String chassi;
 	private String modelo;
 	private Integer ano;
@@ -10,10 +10,10 @@ public class Veiculo {
 	private String cor;
 	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getChassi() {

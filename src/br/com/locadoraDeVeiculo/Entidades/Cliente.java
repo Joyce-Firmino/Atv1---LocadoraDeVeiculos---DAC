@@ -1,7 +1,7 @@
 package br.com.locadoraDeVeiculo.Entidades;
 
 public class Cliente {
-	private Long id;
+	private int id;
 	private String nomeCompleto;
 	private String cpf;
 	private String telefone;
@@ -9,10 +9,10 @@ public class Cliente {
 	
 	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNomeCompleto() {

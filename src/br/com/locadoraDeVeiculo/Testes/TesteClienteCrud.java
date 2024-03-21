@@ -38,6 +38,6 @@ public class TesteClienteCrud {
         clienteDao.atualizarCliente(1, cliente);
 
 //		//Deletar um cliente
-//		clienteDao.deletarCliente(1);
+		clienteDao.deletarCliente(1);
     }
 }
